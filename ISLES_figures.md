@@ -1,6 +1,6 @@
 ISLES Figures
 ================
-2026-05-10
+May 18, 2026
 
 - [Setup](#setup)
 - [Figure 1 – Bills Introduced by
@@ -319,7 +319,7 @@ pred_list4_se <- expand.grid(propwomen = seq(0.1, 0.4, by = 0.1),
 
 se_preds4 <- predict(mod_fig4, newdata = pred_list4_se, se.fit = TRUE)
 
-preds <- expand.grid(propwomen = seq(0.1, 0.4, by = 0.1),
+preds4 <- expand.grid(propwomen = seq(0.1, 0.4, by = 0.1),
                      womenissue = c(0, 1)) %>% as_tibble() %>%
   rowwise() %>%
   mutate(estimate = {
@@ -334,15 +334,15 @@ preds <- expand.grid(propwomen = seq(0.1, 0.4, by = 0.1),
 ```
 
 ``` r
-ggplot(preds, aes(x = propwomen, y = estimate,
-                  color = issue_lab, linetype = issue_lab)) +
+ggplot(preds4, aes(x = propwomen, y = estimate,
+                   color = issue_lab, linetype = issue_lab)) +
   geom_line(linewidth = 1.0) + geom_point(size = 2.5) +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high),
                 width = 0.012, linewidth = 0.6) +
-  scale_color_manual(values = c("Other Issues" = isles_cols$ink,
+  scale_color_manual(values = c("Other Issues"   = isles_cols$ink,
                                 "Women's Issues" = isles_cols$blue), name = NULL) +
-  scale_linetype_manual(values = c("Other Issues" = "solid",
-                                   "Women's Issues" = "dotted"), name = NULL) +
+  scale_linetype_manual(values = c("Other Issues"   = "dotted",
+                                   "Women's Issues" = "solid"), name = NULL) +
   scale_x_continuous(breaks = seq(0.1, 0.4, by = 0.1),
                      labels = c(".1", ".2", ".3", ".4")) +
   scale_y_continuous(limits = c(0.22, 0.32), breaks = seq(0.22, 0.32, by = 0.02)) +
@@ -407,10 +407,10 @@ ggplot(preds5, aes(x = propwomen, y = estimate,
   geom_line(linewidth = 1.0) + geom_point(size = 2.5) +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high),
                 width = 0.012, linewidth = 0.6) +
-  scale_color_manual(values = c("Men Sponsors" = isles_cols$ink,
+  scale_color_manual(values = c("Men Sponsors"   = isles_cols$ink,
                                 "Women Sponsors" = isles_cols$blue), name = NULL) +
-  scale_linetype_manual(values = c("Men Sponsors" = "solid",
-                                   "Women Sponsors" = "dotted"), name = NULL) +
+  scale_linetype_manual(values = c("Men Sponsors"   = "dotted",
+                                   "Women Sponsors" = "solid"), name = NULL) +
   scale_x_continuous(breaks = seq(0.1, 0.4, by = 0.1),
                      labels = c(".1", ".2", ".3", ".4")) +
   scale_y_continuous(limits = c(0.20, 0.32), breaks = seq(0.20, 0.32, by = 0.02)) +
